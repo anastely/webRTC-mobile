@@ -22,21 +22,24 @@ const App = () => {
   const socket = useRef();
   let sdp;
 
-  const serverIP = 'https://b2098b9637a3.ngrok.io';
+  const serverIP = 'https://706c897cfe53.ngrok.io';
 
   useEffect(() => {
     socket.current = io.connect(`${serverIP}/webrtcPeer`, {
       path: '/io/webrtc',
     });
 
-    socket.current.on('connection-success', (success) => {
+    socket.current.on('connection-success', ({success}) => {
       setSuccess(success);
       console.log('success', success);
     });
   }, []);
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 50}}>App:{success}</Text>
+      <Text style={{fontSize: 25, textAlign: 'center', padding: 10}}>
+        App:{'\n'}
+        {success}
+      </Text>
     </View>
   );
 };
